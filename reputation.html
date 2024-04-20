@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Error 321</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<style>
+  @font-face {
+    font-family: "Reputation";
+    src: url("media/reputation.ttf");
+  }
+  * {
+    font-family: "Reputation";
+    color: white;
+    letter-spacing: 2px;
+  }
+  body {
+    background-color: black;
+  }
+  #background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    opacity: 0;
+    z-index: -1;
+  }
+  #text-1, #text-2, #text-3 {
+    opacity: 0;
+  }
+  #text-3 {
+    font-size: 3em;
+    transition: color 5s;
+  }
+</style>
+<body>
+  <img src="media/reputation.jpg" alt="" id="background">
+  <div class="h-100 container-fluid d-flex justify-content-center align-items-center flex-column">
+    <p class="fs-2" id="text-1">if a man talks shit</p>
+    <p class="fs-2" id="text-2">then i owe him</p>
+    <p id="text-3">nothing</p>
+  </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+  $("#background").ready(x => {
+    $("#background").animate({
+      opacity: 1
+    }, 5000, y => {
+      $("#text-1").animate({
+        opacity: 1
+      });
+      setTimeout(_ => $("#text-2").animate({
+        opacity: 1
+      }), 1000);
+      setTimeout(_ => {
+        $("#text-3").css({
+          opacity: 1,
+          color: "#FF9494"
+        }).animate({
+          letterSpacing: "10px"
+        }, 5000, _ => {
+          $("#text-3").animate({
+            letterSpacing: "2px",
+            opacity: 0
+          }, 7000);
+          setTimeout(x => $("#text-2").animate({
+            opacity: 0
+          }, 3000), 3000);
+          setTimeout(x => $("#text-1").animate({
+            opacity: 0
+          }, 3000), 3500);
+          setTimeout(x => $("#background").animate({
+            opacity: 0
+          }, 5000, y => {
+            setTimeout(z => {
+              location.href = "https://bit.ly/my-ttpd-song";
+            }, 3000)
+          }), 4000);
+        });
+      }, 2000);
+    });
+  });
+</script>
+</html>
