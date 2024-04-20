@@ -5,9 +5,12 @@ $("#button").click(evt => {
   if(text.length == "") return $("#label").text("please type your name!").show();
   if(text.length > 25) return $("#label").text("too long! (london)").show();
   $("#button, #input, #card-title").attr("disabled", "").fadeOut(500, x => {
+    transition();
     $("#card-title").text("Your song is...").fadeIn(500, async y => {
+      if(text.replaceAll(" ", "").includes("kanye") || text.replaceAll(" ", "").includes("kimk")) return reputation();
       const s = seed(text);
       const t = await track(endpoints[s]);
+      clearInterval(transint);
       $("#sub").toggle(s > 15);
       $("#track").text(t.title);
       $("#play").attr("href", `https://m.youtube.com/results?sp=mAEA&search_query=${endpoints[s].replaceAll(" ", "+")}+taylor+swift`);
@@ -36,6 +39,16 @@ function seed(text) {
   return res;
 }
 
+let transint = null;
+function transition() {
+  let i = 0;
+  transint = setInterval(_ => {
+    i++;
+    if(i == 3) i = 0;
+    $("#card-title").html("Your song is" + ".".repeat(i + 1) + "&nbsp;".repeat(2 - i));
+  }, 500);
+}
+
 async function track(endpoint) {
   const f = await fetch(`https://lyrist.vercel.app/api/${endpoint.replaceAll(" ", "+")}/taylor+swift`);
   let r = await f.json();
@@ -45,8 +58,42 @@ async function track(endpoint) {
   }
 }
 
+function placeholder(raw) {
+  let last = $("#input").attr("placeholder");
+  let i = last.length;
+  let int = setInterval(_ => {
+    if(i == 0) return next(int);
+    $("#input").attr("placeholder", last.substr(0, i));
+    i--;
+  }, 70);
+  function next() {
+    clearInterval(int);
+    i = 0;
+    int = setInterval(_ => {
+      if(i - 1 == raw.length) return clearInterval(int);
+      $("#input").attr("placeholder", raw.substr(0, i));
+      i++;
+    }, 100);
+  }
+}
+
+function reputation() {
+  $("#filter").animate({
+    opacity: 1
+  }, 5000, _ => {
+    location.href = "https://my-ttpd-song.vercel.app/reputation.html";
+  });
+  clearInterval(transint);
+}
+
 $(document).ready(_ => {
-  const names = ["taylor swift", "clara bow", "that black dog", "charlie puth", "that smallest man", "chloe", "sam", "sophia", "marcus", "aimee", "cassandra", "peter", "robin", "florence", "post malone", "stevie nicks", "dylan thomas", "patti smith", "chelsea hotel", "london", "delv", "travis kelce", "kim xxx"];
+  setTimeout(function() {
+    $("#title").animate({ opacity: 1 }, 500);
+    setTimeout(_ => $("#card-title").animate({ opacity: 1 }, 500), 700);
+    setTimeout(_ => $("#card-input").animate({ opacity: 1 }, 500), 1200);
+    setTimeout(_ => $("#footer").animate({ opacity: 1 }, 500), 1900);
+  }, 500);
+  const names = ["taylor swift", "clara bow", "that black dog", "charlie puth", "that smallest man", "chloe", "sam", "sophia", "marcus", "aimee", "cassandra", "peter", "robin", "florence", "post malone", "stevie nicks", "dylan thomas", "patti smith", "chelsea hotel", "london", "delv", "travis kelce"];
   let i = Math.floor(Math.random() * names.length);
   let used = [i];
   $("#input").attr("placeholder", names[i]);
@@ -54,7 +101,7 @@ $(document).ready(_ => {
     if(used.length == names.length) used = [];
     i = Math.floor(Math.random() * names.length);
     while(used.includes(i)) i = Math.floor(Math.random() * names.length);
-    $("#input").attr("placeholder", names[i]);
+    placeholder(names[i]);
     used.push(i);
-  }, 3000);
-})
+  }, 7000);
+});
