@@ -30,6 +30,13 @@ body {
   font-size: 1.1em;
 }
 
+#card-title,
+#title,
+#card-input,
+#footer {
+  opacity: 0;
+}
+
 #album {
   width: 70%;
 }
@@ -97,4 +104,11 @@ body {
 #footer a, #play, #refresh {
   font-size: 0.7em;
   text-decoration: none;
+}
+
+#filter {
+  pointer-events: none;
+  z-index: 99;
+  background-color: black;
+  opacity: 0;
 }
