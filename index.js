@@ -65,18 +65,17 @@ function placeholder(raw, first) {
     let last = $("#input").attr("placeholder");
     var i = last.length;
     var int = setInterval(_ => {
-      if(i == 0) return next(int);
+      if(i == 0) {
+        clearInterval(int);
+        return next(int);
+      }
       $("#input").attr("placeholder", last.substr(0, i));
       i--;
     }, 70);
   } else next();
   function next() {
-    if(first != true) clearInterval(int);
-    else {
-      var i, int;
-    }
-    i = 0;
-    int = setInterval(_ => {
+    var i = 0;
+    var int = setInterval(_ => {
       if(i - 1 == raw.length) return clearInterval(int);
       $("#input").attr("placeholder", raw.substr(0, i));
       i++;
