@@ -108,5 +108,5 @@ $(document).ready(_ => {
     while(used.includes(i)) i = Math.floor(Math.random() * names.length);
     placeholder(names[i]);
     used.push(i);
-  }, 7000);
+  }, 5000);
 });
