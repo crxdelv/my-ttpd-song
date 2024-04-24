@@ -93,18 +93,18 @@ function reputation() {
 }
 
 $(document).ready(_ => {
+  const names = ["taylor swift", "clara bow", "that black dog", "charlie puth", "that smallest man", "chloe", "sam", "sophia", "marcus", "aimee", "cassandra", "peter", "robin", "florence", "post malone", "stevie nicks", "dylan thomas", "patti smith", "chelsea hotel", "london", "delv", "travis kelce", "emma stone", "the chairman", "nils sjoberg", "meredith grey", "olivia benson", "benjamin button"];
+  let i = Math.floor(Math.random() * names.length);
+  var used = [i];
   setTimeout(function() {
     $("#title").animate({ opacity: 1 }, 500);
     setTimeout(_ => $("#card-title").animate({ opacity: 1 }, 500), 700);
     setTimeout(_ => $("#card-input").animate({ opacity: 1 }, 500, __ => placeholder(names[i], true)), 1200);
     setTimeout(_ => $("#footer").animate({ opacity: 1 }, 500), 1900);
   }, 500);
-  const names = ["taylor swift", "clara bow", "that black dog", "charlie puth", "that smallest man", "chloe", "sam", "sophia", "marcus", "aimee", "cassandra", "peter", "robin", "florence", "post malone", "stevie nicks", "dylan thomas", "patti smith", "chelsea hotel", "london", "delv", "travis kelce", "emma stone", "the chairman", "nils sjoberg", "Meredith Grey", "Olivia Benson", "Benjamin Button"];
-  let i = Math.floor(Math.random() * names.length);
-  let used = [i];
   setInterval(x => {
     if(used.length == names.length) used = [];
-    i = Math.floor(Math.random() * names.length);
+    let i = Math.floor(Math.random() * names.length);
     while(used.includes(i)) i = Math.floor(Math.random() * names.length);
     placeholder(names[i]);
     used.push(i);
