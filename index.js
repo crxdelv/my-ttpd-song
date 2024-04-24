@@ -78,7 +78,14 @@ function placeholder(raw, first) {
       $("#input").attr("placeholder", last.substr(0, i));
       i--;
     }, 70);
-  } else next();
+  } else {
+    let i = 0;
+    let int = setInterval(_ => {
+      if(i - 1 == raw.length) return clearInterval(int);
+      $("#input").attr("placeholder", raw.substr(0, i));
+      i++;
+    }, 100);
+  }
 }
 
 function reputation() {
