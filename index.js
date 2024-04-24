@@ -61,26 +61,22 @@ async function track(endpoint) {
 }
 
 function placeholder(raw, first) {
-  function next() {
-    clearInterval(int);
-    i = 0;
-    int = setInterval(_ => {
-      if(i - 1 == raw.length) return clearInterval(int);
-      $("#input").attr("placeholder", raw.substr(0, i));
-      i++;
-    }, 100);
-  }
   if(first != true) {
     let last = $("#input").attr("placeholder");
-    let i = last.length;
-    let int = setInterval(_ => {
+    var i = last.length;
+    var int = setInterval(_ => {
       if(i == 0) return next(int);
       $("#input").attr("placeholder", last.substr(0, i));
       i--;
     }, 70);
-  } else {
-    let i = 0;
-    let int = setInterval(_ => {
+  } else next();
+  function next() {
+    if(first != true) clearInterval(int);
+    else {
+      var i, int;
+    }
+    i = 0;
+    int = setInterval(_ => {
       if(i - 1 == raw.length) return clearInterval(int);
       $("#input").attr("placeholder", raw.substr(0, i));
       i++;
