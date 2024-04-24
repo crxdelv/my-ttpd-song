@@ -1,3 +1,5 @@
+// Hardcoded by creuserr (on github)
+
 $("#button").click(evt => {
   $("#label").hide();
   const text = $("#input").val().trim();
