@@ -99,7 +99,7 @@ $(document).ready(_ => {
     setTimeout(_ => $("#card-input").animate({ opacity: 1 }, 500, __ => placeholder(names[i], true)), 1200);
     setTimeout(_ => $("#footer").animate({ opacity: 1 }, 500), 1900);
   }, 500);
-  const names = ["taylor swift", "clara bow", "that black dog", "charlie puth", "that smallest man", "chloe", "sam", "sophia", "marcus", "aimee", "cassandra", "peter", "robin", "florence", "post malone", "stevie nicks", "dylan thomas", "patti smith", "chelsea hotel", "london", "delv", "travis kelce", "emma stone", "the chairman", "nils sjoberg"];
+  const names = ["taylor swift", "clara bow", "that black dog", "charlie puth", "that smallest man", "chloe", "sam", "sophia", "marcus", "aimee", "cassandra", "peter", "robin", "florence", "post malone", "stevie nicks", "dylan thomas", "patti smith", "chelsea hotel", "london", "delv", "travis kelce", "emma stone", "the chairman", "nils sjoberg", "Meredith Grey", "Olivia Benson", "Benjamin Button"];
   let i = Math.floor(Math.random() * names.length);
   let used = [i];
   setInterval(x => {
