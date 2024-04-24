@@ -60,14 +60,7 @@ async function track(endpoint) {
   }
 }
 
-function placeholder(raw) {
-  let last = $("#input").attr("placeholder");
-  let i = last.length;
-  let int = setInterval(_ => {
-    if(i == 0) return next(int);
-    $("#input").attr("placeholder", last.substr(0, i));
-    i--;
-  }, 70);
+function placeholder(raw, first) {
   function next() {
     clearInterval(int);
     i = 0;
@@ -77,6 +70,15 @@ function placeholder(raw) {
       i++;
     }, 100);
   }
+  if(first != true) {
+    let last = $("#input").attr("placeholder");
+    let i = last.length;
+    let int = setInterval(_ => {
+      if(i == 0) return next(int);
+      $("#input").attr("placeholder", last.substr(0, i));
+      i--;
+    }, 70);
+  } else next();
 }
 
 function reputation() {
@@ -98,7 +100,7 @@ $(document).ready(_ => {
   const names = ["taylor swift", "clara bow", "that black dog", "charlie puth", "that smallest man", "chloe", "sam", "sophia", "marcus", "aimee", "cassandra", "peter", "robin", "florence", "post malone", "stevie nicks", "dylan thomas", "patti smith", "chelsea hotel", "london", "delv", "travis kelce"];
   let i = Math.floor(Math.random() * names.length);
   let used = [i];
-  $("#input").attr("placeholder", names[i]);
+  placeholder(names[i], true);
   setInterval(x => {
     if(used.length == names.length) used = [];
     i = Math.floor(Math.random() * names.length);
