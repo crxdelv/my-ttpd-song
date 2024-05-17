@@ -5,8 +5,5 @@
 <br>
 
 > [!NOTE]
-> **To be reconstructed soon**
-> 
-> Due to unforeseen layout failures, I have decided to reconstruct this project soon, primarily focusing on fixing the responsive layout.
->
-> *Stamped at May 4, 2024*
+> **Update Cancelled**
+> The reconstruction plan for this repository has been cancelled.
