@@ -5,6 +5,6 @@
 <br>
 
 > [!NOTE]
-> **Update Cancelled**
-> 
-> The reconstruction plan for this repository has been cancelled.
+> **Under reconstruction** <br>
+> Due to unforeseen layout failures, this repository is under reconstruction. <br>
+> <sub>*Restamped at May 20, 2024*</sub>
