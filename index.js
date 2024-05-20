@@ -1,5 +1,3 @@
-// Hardcoded by creuserr (on github)
-
 $("#button").click(evt => {
   $("#label").hide();
   const text = $("#input").val().trim();
@@ -9,7 +7,6 @@ $("#button").click(evt => {
   $("#button, #input, #card-title").attr("disabled", "").fadeOut(500, x => {
     transition();
     $("#card-title").text("Your song is...").fadeIn(500, async y => {
-      if(text.replaceAll(" ", "").includes("kanye") || text.replaceAll(" ", "").includes("kimk")) return reputation();
       const s = seed(text);
       const t = await track(endpoints[s]);
       clearInterval(transint);
