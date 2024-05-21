@@ -1,10 +1,10 @@
-<p align="center"><a href="https://bit.ly/my-ttpd-song"><img src="https://images.genius.com/48394cc3d17656b89aec73549d8863b6.1000x1000x1.png" width="200" alt="The Tortured Poets Department"></a></p>
-
-[![](media/banner.svg)](https://bit.ly/my-ttpd-song)
-
-<br>
-
-> [!NOTE]
-> **Under reconstruction** <br>
-> Due to unforeseen layout failures, this repository is under reconstruction. <br>
-> <sub>*Restamped at May 20, 2024*</sub>
+<p align="center"><a href="https://bit.ly/my-ttpd-song">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="https://my-ttpd-song.vercel.app/img/standard.jpg">
+    <img alt="" src="https://my-ttpd-song.vercel.app/img/standard.jpg">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://my-ttpd-song.vercel.app/img/anthology.jpg">
+    <img alt="" src="https://my-ttpd-song.vercel.app/img/anthology.jpg">
+  </picture>
+</a></p>
