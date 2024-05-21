@@ -1,109 +1,116 @@
-$("#button").click(evt => {
-  $("#label").hide();
-  const text = $("#input").val().trim();
-  if(text.match(/[^a-z0-9\s]/gi) != null) return $("#label").text("letters, numbers, and spaces only!").show();
-  if(text.length == "") return $("#label").text("please type your name!").show();
-  if(text.length > 25) return $("#label").text("too long! (london)").show();
-  $("#button, #input, #card-title").attr("disabled", "").fadeOut(500, x => {
-    transition();
-    $("#card-title").text("Your song is...").fadeIn(500, async y => {
-      const s = seed(text);
-      const t = await track(endpoints[s]);
-      clearInterval(transint);
-      $("#sub").toggle(s > 15);
-      $("#track").text(t.title);
-      $("#play").attr("href", `https://m.youtube.com/results?sp=mAEA&search_query=${endpoints[s].replaceAll(" ", "+")}+taylor+swift`);
-      $("#album").attr("src", t.image).on("load", z => {
-        $("#card-title").fadeOut(500, _ => {
-          $("#card-intro").hide();
-          $("#card-track").css("display", "flex").animate({ opacity: 1 });
-        });
-      });
-    });
-  })
-});
+const tracklist = ["fortnight<br><span>(feat. post malone)</span>", "the tortured poets department", "my boy only breaks his favorite toys", "down bad", "so long, london", "but daddy i love him", "fresh out the slammer", "florida!!!<br><span>(feat. florence + the machine)</span>", "guilty as sin?", "who's afraid of little old me?", "i can fix him (no really i can)", "loml", "i can do it with a broken heart", "the smallest man who ever lived", "the alchemy", "clara bow", "the black dog", "imgonnagetyouback", "the albatross", "chloe or sam or sophia or marcus", "how did it end?", "so high school", "i hate it here", "thank you aimee", "i look in peoples window", "the prophecy", "cassandra", "peter", "the bolter", "robin", "the manuscript"];
+const keywords = ["fortnight", "the tortured poets department", "my boy only breaks his favorite toys", "down bad", "so long london", "but daddy i love him", "fresh out the slammer", "florida", "guilty as sin", "whos afraid of little old me", "i can fix him (no really i can)", "loml", "i can do it with a broken heart", "the smallest man who ever lived", "the alchemy", "clara bow", "the black dog", "imgonnagetyouback", "the albatross", "chloe or sam or sophia or marcus", "how did it end", "so high school", "i hate it here", "thank you aimee", "i look in peoples window", "the prophecy", "cassandra", "peter", "the bolter", "robin", "the manuscript"];
+const names = ["taylor swift", "clara bow", "that black dog", "charlie puth", "that smallest man", "chloe", "sam", "sophia", "marcus", "aimee", "cassandra", "peter", "robin", "florence", "post malone", "stevie nicks", "dylan thomas", "patti smith", "chelsea hotel", "london", "delve", "travis kelce", "emma stone", "the chairman", "nils sjoberg", "meredith grey", "olivia benson", "benjamin button"];
+const covers = ["fortnight.png", new Array(14).fill("standard.png"), new Array(2).fill("anthology.jpg"), "albatross.jpg", new Array(10).fill("anthology.jpg"), "bolter.jpg", new Array(2).fill("anthology.jpg")].flat();
+const yt = ["F4sRtMoIgUs", "L92Ui4LzP2U", "jwtXVmFTYVY", "N61UALi1MuI", "WDVCPCKPLwg", "Q3wtBSk1YS4", "_XGbyjwGiCA", "m6hi8iuajzE", "ESFAIxZb8K4", "in1YgJkraEE", "Ck5L06dQ060", "o0NlmZg9ahI", "_x8kI-aM56M", "lSCbseKwNFI", "FK-ETNt7M7E", "iJJDUmk8XNA", "5-wL58HMsXo", "B8z8FRyT_lU", "TZaa2cJFBg0", "CK4QBAOgJ6c", "T0ltPgydMhg", "raBlDihTtbU", "-3r6lwB5VBI", "grbVHCV4yYc", "n_Exoqe2xdE", "gKLNmXPTXMc", "rxXPPSwwhfo", "lEpMyK2_DU0", "WiadPYfdSL0", "XWTuqWcOJEM", "6hvDW1mt_nE"];
 
-const endpoints = ["fortnight", "the tortured poets department", "my boy only breaks his favorite toys", "down bad", "so long london", "but daddy i love him", "fresh out the slammer", "florida", "guilty as sin", "whos afraid of little old me", "i can fix him", "loml", "i can do it with a broken heart", "the smallest man who ever lived", "the alchemy", "clara bow", "the black dog", "imgonnagetyouback", "the albatross", "chloe or sam or sophia or marcus", "how did it end", "so high school", "i hate it here", "thank you aimee", "i look in peoples window", "the prophecy", "cassandra", "peter", "the bolter", "robin", "the manuscript"];
-
-function seed(text) {
-  let res = 0;
-  let count = 0;
-  text.split("").forEach(char => {
-    count += char.charCodeAt(0);
+async function delay(time) {
+  return new Promise(res => {
+    setTimeout(res, time);
   });
-  for(let i = 0; i < count; i++) {
-    res++;
-    if(res > endpoints.length) res = 0;
+}
+
+var inprogress = false;
+async function next() {
+  if(inprogress) return;
+  inprogress = true;
+  $("#label").css("opacity", 0);
+  const raw = $("#form-input").val().trim().toLowerCase();
+  if(raw.length < 2) {
+    inprogress = false;
+    $("#label-text").text("Too short");
+    return $("#label").css("opacity", 1);
   }
+  if(raw.length > 30) {
+    inprogress = false;
+    $("#label-text").text("Too long");
+    return $("#label").css("opacity", 1);
+  }
+  const id = raw.replaceAll(" ", "");
+  if(id.includes("kimk") || id.includes("kanye")) {
+    inprogress = false;
+    $("#label-text").text("Error 321");
+    return $("#label").css("opacity", 1);
+  }
+  $("#card, #label, #subtitle").css("opacity", 0);
+  $("#spinner").css("opacity", 1);
+  clearInterval(animation);
+  const num = seed(raw);
+  const track = tracklist[num];
+  const cover = covers[num];
+  const ytid = yt[num];
+  window.keyword = keywords[num];
+  const aud = document.createElement("audio");
+  aud.src = "https://creytm.vercel.app/" + ytid;
+  aud.volume = 0.3;
+  document.body.append(aud);
+  $(aud).on("canplaythrough", _ => {
+    end(num > 15, track, cover);
+    aud.play();
+  });
+}
+
+async function end(reissue, track, cover) {
+  $("#end-cover").attr("src", `img/${cover}`);
+  $("#end-title").html(track);
+  $("#end-reissue").toggle(reissue);
+  $("#spinner").css("opacity", 0);
+  await delay(500);
+  $("#card, #card-outer, #spinner").hide();
+  $("#end").show();
+  $("#end *:not(#end-reissue, #end-title > span)").css("opacity", 1);
+  $("#end-reissue, #end-title > span").css("opacity", 0.5);
+}
+
+function seed(raw) {
+  let res = 0;
+  raw.split("").forEach(char => {
+    res += Math.round(char.charCodeAt(0) / 31);
+    if(res > 30) res -= 31;
+  });
+  if(res > 30) res -= 31;
   return res;
 }
 
-let transint = null;
-function transition() {
+var keyword = null;
+function stream() {
+  location.href = "https://open.spotify.com/search/results/" + encodeURI(keyword);
+}
+
+async function typewrite(last, raw) {
   let i = 0;
-  transint = setInterval(_ => {
-    i++;
-    if(i == 3) i = 0;
-    $("#card-title").html("Your song is" + ".".repeat(i + 1) + "&nbsp;".repeat(2 - i));
-  }, 500);
-}
-
-async function track(endpoint) {
-  const f = await fetch(`https://lyrist.vercel.app/api/${endpoint.replaceAll(" ", "+")}/taylor+swift`);
-  let r = await f.json();
-  return {
-    image: r.image,
-    title: r.title + (endpoint == "florida" ? " (feat. florence + the machine)" : (endpoint == "fortnight" ? " (feat. post malone)" : ""))
+  if(last != null) {
+    for(i = 0; i < last.length + 1; i++) {
+      $("#form-input").attr("placeholder", last.substr(0, last.length - i));
+      await delay(100);
+    }
+  }
+  for(i = 0; i < raw.length + 1; i++) {
+    $("#form-input").attr("placeholder", raw.substr(0, i));
+    await delay(200);
   }
 }
 
-function placeholder(raw, first) {
-  if(first != true) {
-    let last = $("#input").attr("placeholder");
-    var i = last.length;
-    var int = setInterval(_ => {
-      if(i == 0) {
-        clearInterval(int);
-        return next(int);
-      }
-      $("#input").attr("placeholder", last.substr(0, i));
-      i--;
-    }, 70);
-  } else next();
-  function next() {
-    var i = 0;
-    var int = setInterval(_ => {
-      if(i - 1 == raw.length) return clearInterval(int);
-      $("#input").attr("placeholder", raw.substr(0, i));
-      i++;
-    }, 100);
-  }
-}
-
-function reputation() {
-  $("#filter").animate({
-    opacity: 1
-  }, 5000, _ => {
-    location.href = "https://my-ttpd-song.vercel.app/reputation.html";
-  });
-  clearInterval(transint);
-}
-
-$(document).ready(_ => {
-  const names = ["taylor swift", "clara bow", "that black dog", "charlie puth", "that smallest man", "chloe", "sam", "sophia", "marcus", "aimee", "cassandra", "peter", "robin", "florence", "post malone", "stevie nicks", "dylan thomas", "patti smith", "chelsea hotel", "london", "delv", "travis kelce", "emma stone", "the chairman", "nils sjoberg", "meredith grey", "olivia benson", "benjamin button"];
-  let i = Math.floor(Math.random() * names.length);
-  var used = [i];
-  setTimeout(function() {
-    $("#title").animate({ opacity: 1 }, 500);
-    setTimeout(_ => $("#card-title").animate({ opacity: 1 }, 500), 700);
-    setTimeout(_ => $("#card-input").animate({ opacity: 1 }, 500, __ => placeholder(names[i], true)), 1200);
-    setTimeout(_ => $("#footer").animate({ opacity: 1 }, 500), 1900);
-  }, 500);
-  setInterval(x => {
-    if(used.length == names.length) used = [];
+var animation = null;
+$(document).ready(async _ => {
+  await delay(500);
+  $("#title").css("opacity", 1);
+  await delay(500);
+  $("#subtitle").css("opacity", 0.7);
+  await delay(500);
+  $("#card").css("opacity", 1);
+  await delay(500);
+  $("#footer").css("opacity", 1);
+  let used = [];
+  let last = null;
+  let animate = async _ => {
     let i = Math.floor(Math.random() * names.length);
-    while(used.includes(i)) i = Math.floor(Math.random() * names.length);
-    placeholder(names[i]);
+    if(used.length == names.length) used = [];
+    if(used.includes(i)) i = Math.floor(Math.random() * names.length);
     used.push(i);
-  }, 5000);
+    await typewrite(last, names[i]);
+    last = names[i];
+  }
+  animation = setInterval(animate, 5e3);
+  animate();
 });
