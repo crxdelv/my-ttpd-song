@@ -43,8 +43,9 @@ async function next() {
   const aud = document.createElement("audio");
   aud.src = "https://creytm.vercel.app/" + ytid;
   aud.volume = 0.3;
+  aud.style.display = "none";
   document.body.append(aud);
-  $(aud).on("canplaythrough", _ => {
+  $(aud).attr("controls", "").on("canplaythrough", _ => {
     end(num > 15, track, cover);
     aud.play();
   });
