@@ -72,6 +72,10 @@ body {
   width: 100%;
 }
 
+#form-input::placeholder {
+  color: rgba(228, 220, 217, 0.5);
+}
+
 #form-button {
   text-transform: uppercase;
   background-color: rgba(228, 220, 217, 0.2);
