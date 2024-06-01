@@ -67,9 +67,8 @@ function seed(raw) {
   let res = 0;
   raw.toUpperCase().split("").forEach(char => {
     res += Math.round(char.charCodeAt(0) / 31);
-    if(res > 30) res -= 31;
+    if(res > 30) res = 0;
   });
-  if(res > 30) res -= 31;
   return res;
 }
 
