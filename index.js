@@ -69,6 +69,7 @@ function seed(raw) {
     res += Math.round(char.charCodeAt(0) / 5);
     if(res > 30) res -= 31;
   });
+  if(res > 30) res -= 31;
   return res;
 }
 
