@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bulk Name Testing</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+</head>
+<style>
+  html, body {
+    background-color: #1A1A1A;
+    width: 100%;
+  }
+  * {
+    font-size: 14px;
+    color: #D9D9D9;
+    font-family: Arial;
+  }
+  #input-name {
+    border: 0;
+    outline: none;
+    background-color: rgba(255,255,255,0.1);
+    text-transform: uppercase;
+  }
+  #input-name:hover {
+    background-color: rgba(255,255,255,0.15);
+  }
+  code, .codeblock {
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 5px;
+    padding: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: white;
+    font-family: monospace;
+  }
+  .codeblock {
+    font-size: 12px;
+    display: inline-block;
+  }
+  .codeblock-fade {
+    opacity: 0.5;
+    font-family: inherit;
+    font-size: inherit;
+  }
+  blockquote {
+    border-left: 2px solid rgba(255,255,255,0.1);
+  }
+  hr {
+    border: 0;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    opacity: 1;
+  }
+  #result {
+    display: none;
+  }
+</style>
+<body class="d-flex justify-content-center">
+  <div class="container">
+    <div class="d-flex flex-column">
+      <input type="text" id="input-name" class="rounded p-1 px-3 m-3" placeholder="Taylor Swift" onchange="update()" oninput="check()">
+      <div id="blank">
+        <p class="fs-5 text-center m-0" id="text-hint">Enter your name</p>
+        <p class="text-center text-secondary" id="text-label"></p>
+      </div>
+      <div id="result">
+        <p class="fs-5 text-center m-0" id="text-title">Fortnight (feat. Post Malone)</p>
+        <p class="text-center text-secondary" id="text-anthology">From the Anthology</p>
+        <p class="fw-bold m-1">Values</p>
+        <ul id="list-values"></ul>
+        <p class="fw-bold m-1" id="title-patterns">Patterns</p>
+        <ul id="list-patterns"></ul>
+        <p class="fw-bold m-1" id="title-walkthrough">Walkthrough</p>
+        <ol id="list-walkthrough"></ol>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+  const tracklist = ["Fortnight (feat. Post Malone)", "The Tortured Poets Department", "My Boy Only Breaks His Favorite Toys", "Down Bad", "So Long, London", "But Daddy I Love Him", "Fresh Out The Slammer", "Florida!!! (feat. Florence + The Machine)", "Guilty as Sin?", "Who's Afraid of Little Old Me?", "I Can Fix Him (No Really I Can)", "loml", "I Can Do It With A Broken Heart", "The Smallest Man Who Ever Lived", "The Alchemy", "Clara Bow", "The Black Dog", "imgonnagetyouback", "The Albatross", "Chloe or Sam or Sophia or Marcus", "How Did It End?", "So High School", "I Hate It Here", "thanK you aIMee", "I Look in People's Window", "The Prophecy", "Cassandra", "Peter", "The Bolter", "Robin", "The Manuscript"];
+  function seed(raw, noproc) {
+    let res = 0;
+    let proc = [];
+    raw.toUpperCase().split("").forEach(char => {
+      let val = Math.round(char.charCodeAt(0) / 5);
+      res += val;
+      if(!noproc) proc.push({
+        code: char.charCodeAt(0),
+        value: val,
+        output: res,
+        before: res - val,
+        reset: false,
+        char: char.trim() || "\\s"
+      })
+      if(res > 30) {
+        res -= 31;
+        if(!noproc) proc[proc.length - 1].reset = true;
+      }
+    });
+    if(res > 30) {
+      res -= 31;
+      if(!noproc) proc[proc.length - 1].reset = true;
+    }
+    if(noproc) return res;
+    return [proc, res];
+  }
+  function getMultiplier(proc) {
+    let res = {};
+    proc.forEach(item => {
+      item.multiplier = 1;
+      if(item.char in res) {
+        res[item.char].multiplier++;
+      } else res[item.char] = item;
+    });
+    return Object.values(res);
+  }
+  function scan(raw) {
+    let patterns = {};
+    let key = "";
+    raw.split("").forEach((char, i) => {
+      key += char;
+      if(i < 1 || i == raw.length - 1 || key.trim() != key) return;
+      let track = tracklist[seed(key, true)];
+      patterns[track] = patterns[track] || [];
+      patterns[track].push(key);
+    });
+    return patterns;
+  }
+  function update() {
+    const val = $("#input-name").val().toUpperCase().trim();
+    if(val.length < 2 || val.length > 30 || !/^[\x00-\x7F]*$/.test(val)) {
+      $("#result").hide();
+      return $("#blank").show();
+    } else {
+      $("#result").show();
+      $("#blank").hide();
+    }
+    const [proc, res] = seed(val);
+    const multi = getMultiplier(proc);
+    let html = "";
+    proc.forEach((item, i) => {
+      html += `<li><div class="d-flex gap-3 align-items-center"><code>${item.char}</code><hr class="d-inline-block flex-grow-1"></div><div class="codeblock mt-2 p-2 px-3"><span class="codeblock-fade">// seed = seed + increment_value</span><br>seed = ${item.before} + ${item.value} <br><span class="codeblock-fade">// [${item.output}] ${item.output < 31 ? tracklist[item.output] : ""}</span>`;
+      if(item.output > 31) {
+        html += `<br><br><span class="codeblock-fade">// since the seed has exceeded,<br>// decrease it by 31.</span><br>seed -= 31 <br><span class="codeblock-fade">// [${item.output - 31}] ${item.output - 31 > -1 && item.output - 31 < 31 ? tracklist[item.output - 31] : ""}</span>`;
+      }
+      html += `</div></li><br>`;
+    });
+    $("#list-walkthrough").html(html);
+    html = "";
+    multi.forEach(item => {
+      if(item.multiplier > 1) {
+        html += `<li><span><code>${item.char}</code> &times; ${item.multiplier}</span><blockquote class="m-2 p-2 px-3"><p class="m-0">Character code: <b>${item.code}</b></p><p>Increment value: <b>${item.value}</b></p><p class="fw-bold m-0">With multiplier</p><p class="m-0">Total increment value: <b>${item.value * item.multiplier}</b></p></blockquote></li>`;
+      } else {
+        html += `<li><code>${item.char}</code><blockquote class="m-2 p-2 px-3"><p class="m-0">Character code: <b>${item.code}</b></p><p>Increment value: <b>${item.value}</b></p></blockquote></li>`;
+      }
+    });
+    $("#list-values").html(html);
+    html = "";
+    let patterns = scan(val);
+    for(let key in patterns) {
+      let pattern = patterns[key];
+      if(pattern.length > 1) {
+        html += `<li>${key}:<blockquote class="m-2 p-2 px-3">${pattern.map(p => `<p class="m-0 my-2"><code>${p.toUpperCase()}</code></p>`).join("")}</blockquote></li>`;
+      } else {
+        html += `<li>${key} &lt;&ndash; <code>${pattern[0].toUpperCase()}</code></li>`;
+      }
+    }
+    $("#list-patterns").html(html);
+    $("#text-title").text(tracklist[res]);
+    $("#text-anthology").toggle(res > 15);
+    $("#title-walkthrough").text(`Walkthrough (${val.length} steps)`);
+    $("#title-patterns").text(`Patterns (${Object.keys(patterns).length} tracks found)`);
+  }
+  function check() {
+    const val = $("#input-name").val().toUpperCase();
+    $("#text-label").text("");
+    $("#text-hint").text("Enter your name");
+    if(val.length == 0) return;
+    if(val.length < 2) {
+      $("#text-hint").text("Too short");
+      return $("#text-label").text("Enter another character");
+    }
+    if(val.length > 30) {
+      $("#text-hint").text("Too long");
+      return $("#text-label").text("Only 30 characters are accepted");
+    }
+    if(!/^[\x00-\x7F]*$/.test(val)) {
+      $("#text-hint").text("Invalid name");
+      return $("#text-label").text("Must only contain ASCII characters");
+    }
+    const conv = val.replaceAll(" ", "").toLowerCase();
+    if(conv.includes("kimk") || conv.includes("kanye")) {
+      $("#text-hint").text("Press enter");
+      return $("#text-label").html("As an easter egg, this will not work on the website. (Keys: KIMK, KANYE)");
+    }
+    $("#text-label").text("To view the result");
+    $("#text-hint").text("Press enter");
+  }
+</script>
+</html>
