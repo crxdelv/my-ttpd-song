@@ -66,8 +66,8 @@ async function end(reissue, track, cover) {
 function seed(raw) {
   let res = 0;
   raw.toUpperCase().split("").forEach(char => {
-    res += Math.round(char.charCodeAt(0) / 31);
-    if(res > 30) res = 0;
+    res += Math.round(char.charCodeAt(0) / 5);
+    if(res > 30) res -= 31;
   });
   return res;
 }
