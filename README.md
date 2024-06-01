@@ -14,8 +14,8 @@ To calculate which song should be used, I used this implementation:
 ```js
 function seed(raw) {
   let res = 0;
-  raw.toUpperCase().split("").forEach(char => {
-    res += Math.round(char.charCodeAt(0) / 31);
+  raw.toUpperCase().trim().split("").forEach(char => {
+    res += Math.round(char.charCodeAt(0) / 5);
     if(res > 30) res -= 31;
   });
   if(res > 30) res -= 31;
@@ -23,9 +23,9 @@ function seed(raw) {
 }
 ```
 
-This function iterates the given name by character and increment the variable `res` by the rounded value of its character code divided by 31.
+This function iterates the given name by character and increment the variable `res` by the rounded value of its character code divided by 5.
 
-Whenever the variable `res` exceeds the total tracks, it resets to zero.
+Whenever the variable `res` exceeds the total tracks, it decreases by 31.
 
 ### :test_tube: Bulk name testing
 For instant name testing, go to [/bulk-test](https://my-ttpd-song.vercel.app/bulk-test).
