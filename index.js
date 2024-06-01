@@ -26,6 +26,11 @@ async function next() {
     $("#label-text").text("Too long");
     return $("#label").css("opacity", 1);
   }
+  if(!/^[\x00-\x7F]*$/.test(raw)) {
+    inprogress = false;
+    $("#label-text").text("Contains invalid character");
+    return $("#label").css("opacity", 1);
+  }
   const id = raw.replaceAll(" ", "");
   if(id.includes("kimk") || id.includes("kanye")) {
     inprogress = false;
