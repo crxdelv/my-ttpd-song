@@ -14,7 +14,7 @@ To calculate which song should be used, I used this implementation:
 ```js
 function seed(raw) {
   let res = 0;
-  raw.split("").forEach(char => {
+  raw.toUpperCase().split("").forEach(char => {
     res += Math.round(char.charCodeAt(0) / 31);
     if(res > 30) res -= 31;
   });
