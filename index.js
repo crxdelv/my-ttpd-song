@@ -85,6 +85,8 @@ async function next() {
   $(aud).attr("controls", "").on("canplaythrough", _ => {
     end(num > 15, track, cover);
     aud.play();
+  }).on("error", _ => {
+    end(num > 15, track, cover);
   });
 }
 
