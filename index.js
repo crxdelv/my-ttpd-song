@@ -1,8 +1,8 @@
 const tracklist = ["fortnight<br><span>(feat. post malone)</span>", "the tortured poets department", "my boy only breaks his favorite toys", "down bad", "so long, london", "but daddy i love him", "fresh out the slammer", "florida!!!<br><span>(feat. florence + the machine)</span>", "guilty as sin?", "who's afraid of little old me?", "i can fix him (no really i can)", "loml", "i can do it with a broken heart", "the smallest man who ever lived", "the alchemy", "clara bow", "the black dog", "imgonnagetyouback", "the albatross", "chloe or sam or sophia or marcus", "how did it end?", "so high school", "i hate it here", "thank you aimee", "i look in peoples window", "the prophecy", "cassandra", "peter", "the bolter", "robin", "the manuscript"];
 const keywords = ["fortnight", "the tortured poets department", "my boy only breaks his favorite toys", "down bad", "so long london", "but daddy i love him", "fresh out the slammer", "florida", "guilty as sin", "whos afraid of little old me", "i can fix him (no really i can)", "loml", "i can do it with a broken heart", "the smallest man who ever lived", "the alchemy", "clara bow", "the black dog", "imgonnagetyouback", "the albatross", "chloe or sam or sophia or marcus", "how did it end", "so high school", "i hate it here", "thank you aimee", "i look in peoples window", "the prophecy", "cassandra", "peter", "the bolter", "robin", "the manuscript"];
 const names = ["taylor swift", "clara bow", "that black dog", "charlie puth", "that smallest man", "chloe", "sam", "sophia", "marcus", "aimee", "cassandra", "peter", "robin", "florence", "post malone", "stevie nicks", "dylan thomas", "patti smith", "chelsea hotel", "london", "delve", "travis kelce", "emma stone", "the chairman", "nils sjoberg", "meredith grey", "olivia benson", "benjamin button"];
-const covers = ["fortnight.png", new Array(15).fill("standard.png"), new Array(2).fill("anthology.jpg"), "albatross.jpg", new Array(10).fill("anthology.jpg"), "bolter.jpg", new Array(2).fill("anthology.jpg")].flat();
-const yt = [
+const covers = ["fortnight.png", new Array(15).fill("standard.png"), new Array(2).fill("anthology.jpg"), "albatross.jpg", new Array(9).fill("anthology.jpg"), "bolter.jpg", new Array(2).fill("anthology.jpg")].flat();
+/*const yt = [
   "https://creytm.vercel.app/F4sRtMoIgUs/fortnight.mp3",
   "https://creytm.vercel.app/L92Ui4LzP2U/the-tortured-poets-department.mp3",
   "https://creytm.vercel.app/jwtXVmFTYVY/my-boy-only-breaks-his-favorite-toys.mp3",
@@ -34,7 +34,7 @@ const yt = [
   "https://creytm.vercel.app/WiadPYfdSL0/the-bolter.mp3",
   "https://creytm.vercel.app/XWTuqWcOJEM/robin.mp3",
   "https://creytm.vercel.app/6hvDW1mt_nE/the-manuscript.mp3"
-];
+];*/
 
 async function delay(time) {
   return new Promise(res => {
@@ -75,19 +75,21 @@ async function next() {
   const num = seed(raw);
   const track = tracklist[num];
   const cover = covers[num];
-  const ytsrc = yt[num];
+  // const ytsrc = yt[num];
   window.keyword = keywords[num];
-  const aud = document.createElement("audio");
+  /*const aud = document.createElement("audio");
   aud.src = ytsrc;
   aud.volume = 0.3;
   aud.style.display = "none";
-  document.body.append(aud);
+  document.body.append(aud);*/
+  end(num > 15, track, cover);
+  /*
   $(aud).attr("controls", "").on("canplaythrough", _ => {
     end(num > 15, track, cover);
     aud.play();
   }).on("error", _ => {
     end(num > 15, track, cover);
-  });
+  });*/
 }
 
 async function end(reissue, track, cover) {
