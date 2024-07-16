@@ -82,7 +82,9 @@ async function next() {
   aud.volume = 0.3;
   aud.style.display = "none";
   document.body.append(aud);*/
-  end(num > 15, track, cover);
+  setTimeout(function() {
+    end(num > 15, track, cover);
+  }, 1e3);
   /*
   $(aud).attr("controls", "").on("canplaythrough", _ => {
     end(num > 15, track, cover);
