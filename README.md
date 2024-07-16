@@ -38,10 +38,10 @@ This includes the name informations, process, and the output.
 
 There are currently 4 stages available. The fifth one is probably the **reputation (Taylor's Version)**.
 
-1. Stage 1: Denial &ndash; Standard
-2. Stage 2: Bargaining &ndash; *The Albatross*
-3. Stage 3: Anger &ndash; Anthology
-4. Stage 4: Depression &ndash; *The Bolter*
+- Stage 1: Denial &ndash; Standard
+- Stage 2: Bargaining &ndash; *The Albatross*
+- Stage 3: Anger &ndash; Anthology
+- Stage 4: Depression &ndash; *The Bolter*
 
 #### Positions
 
