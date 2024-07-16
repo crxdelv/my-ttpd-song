@@ -30,7 +30,7 @@ var inprogress = false;
 async function next() {
   if(inprogress) return;
   inprogress = true;
-  $("#label, #tip, #title").css("opacity", 0);
+  $("#label").css("opacity", 0);
   const raw = $("#form-input").val().trim().toLowerCase();
   if(raw.length < 2) {
     inprogress = false;
@@ -59,7 +59,7 @@ async function next() {
     $("#label-text").text("Error 321: rep tv is coming!");
     return $("#label").css("opacity", 1);
   }
-  $("#card, #label, #subtitle").css("opacity", 0);
+  $("#card, #label, #subtitle, #tip, #title").css("opacity", 0);
   $("#spinner").css("opacity", 1);
   clearInterval(animation);
   const num = seed(raw);
