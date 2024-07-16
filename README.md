@@ -9,7 +9,7 @@
 
 ### :book: Under the hood
 
-To calculate which song should be used, I used this implementation:
+To calculate which song, I used this implementation:
 
 ```js
 function seed(raw) {
