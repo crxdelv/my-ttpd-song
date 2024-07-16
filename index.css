@@ -53,7 +53,8 @@ body {
 #card,
 #spinner,
 #end *,
-#label {
+#label,
+#tip {
   opacity: 0;
   transition: opacity 0.5s;
 }
@@ -139,7 +140,33 @@ body {
   height: 16px;
 }
 
-.button:last-child {
+.button:not(#btn-stream) {
+  aspect-ratio: 1/1;
+}
+
+#btn-stream {
+  font-size: 12px;
+}
+
+#btn-reload {
   width: 39.2px;
   height: 39.2px;
+}
+
+#end-cover {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+}
+
+#end-stage {
+  font-size: 12px;
+  background-color: rgba(255,255,255,0.2);
+  display: inline-block;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#tip {
+  font-size: 14px;
 }

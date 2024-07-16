@@ -9,7 +9,7 @@
   <meta property="og:description" content="THE TORTURED POETS DEPARTMENT (@creuserr on github)">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://my-ttpd-song.vercel.app">
-  <meta property="og:image" content="img/standard.png">
+  <meta property="og:image" content="img/anthology.jpg">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="720">
   <meta property="og:site_name" content="THE TORTURED POETS DEPARTMENT">
@@ -24,8 +24,8 @@
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <img src="img/background.jpg" alt="" id="background">
-  <p class="text-center" id="title"><br>The Tortured Poets Department</p>
+  <img src="img/background.jpg" alt="" id="background"><br>
+  <p class="text-center px-2" id="title">The Tortured Poets Department</p>
   <div class="flex-grow-1 d-flex justify-content-center"><div class="container col-md-6 my-5">
     <div id="card-outer">
       <p class="text-center m-0" id="subtitle">What's your name?</p>
@@ -34,29 +34,30 @@
         <button id="form-button" onclick="next()"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#E4DCD9" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l3.235 1.94a2.8 2.8 0 0 0-.233 1.027L1 5.384v5.721l3.453-2.124q.219.416.55.835l-3.97 2.443A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741l-3.968-2.442q.33-.421.55-.836L15 11.105V5.383l-3.002 1.801a2.8 2.8 0 0 0-.233-1.026L15 4.217V4a1 1 0 0 0-1-1zm6 2.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/></svg></button>
       </div>
       <p id="label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#E4DCD9" class="bi bi-cone-striped" viewBox="0 0 16 16"><path d="m9.97 4.88.953 3.811C10.159 8.878 9.14 9 8 9s-2.158-.122-2.923-.309L6.03 4.88C6.635 4.957 7.3 5 8 5s1.365-.043 1.97-.12m-.245-.978L8.97.88C8.718-.13 7.282-.13 7.03.88L6.275 3.9C6.8 3.965 7.382 4 8 4s1.2-.036 1.725-.098m4.396 8.613a.5.5 0 0 1 .037.96l-6 2a.5.5 0 0 1-.316 0l-6-2a.5.5 0 0 1 .037-.96l2.391-.598.565-2.257c.862.212 1.964.339 3.165.339s2.303-.127 3.165-.339l.565 2.257z"/></svg><span id="label-text">too long</span></p>
+      <p class="text-center px-3" id="tip">Try finding all the stages of grief and positions!</p>
     </div>
     <div class="d-flex justify-content-center">
       <div id="spinner" class="rounded-5 p-2">
         <div class="spinner-border"></div>
       </div>
     </div>
-    <div id="end" class="d-flex justify-content-center align-items-center"><div class="align-items-center justify-content-center row gap-2">
-      <div class="col-md-4 col-8">
+    <div id="end" class="d-flex justify-content-center align-items-center"><div class="align-items-center justify-content-center row gap-3">
+      <div class="col-md-6 col-8 d-flex justify-content-center flex-column">
+        <p class="text-center rounded-5" id="end-stage"></p>
         <img src="" alt="" id="end-cover" class="w-100 rounded">
       </div>
       <div class="col-md-6 col-12">
         <p id="end-title" class="m-0 text-center"></p>
         <p id="end-reissue" class="m-0 mt-1 text-center">From the anthology</p><br>
         <div class="d-flex gap-2 align-items-center justify-content-center">
-          <button onclick="stream()" class="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#37312D" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.669 11.538a.5.5 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686m.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858m.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288"/></svg> stream</button>
-          <button onclick="location.reload()" class="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#37312D" viewBox="0 0 16 16"><path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/><path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/></svg></button>
+          <button onclick="stream()" class="button" id="btn-stream"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#37312D" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.669 11.538a.5.5 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686m.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858m.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288"/></svg> stream</button>
+          <button onclick="location.reload()" class="button" id="btn-reload"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#37312D" viewBox="0 0 16 16"><path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/><path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/></svg></button>
         </div>
       </div>
     </div></div>
   </div></div>
-  <p id="footer" class="text-center m-0"><a href="https://github.com/creuserr">by delve (<sub>v</sub>4.1)</a></p>
+  <p id="footer" class="text-center m-0"><a href="https://github.com/creuserr/my-ttpd-song">by delve (<sub>v</sub>5)</a></p>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="index.js"></script>
-<script src="https://crebin.vercel.app/static/crellect.js" defer=""></script>
 </html>
