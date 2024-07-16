@@ -32,7 +32,33 @@ For instant name testing, go to [/bulk-test](https://my-ttpd-song.vercel.app/bul
 
 This includes the name informations, process, and the output.
 
-### :balance_scale: Disclaimer
-**my-ttpd-song** only host the image files and not the audio. It  relies on third-party services to play music.
+### :fallen_leaf: What's new? <kbd>v5</kbd>
 
-For any DMCA requests of audio removal, please contact me.
+#### Stages of Grief
+
+There are currently 4 stages available. The fifth one is probably the **reputation (Taylor's Version)**.
+
+1. Stage 1: Denial &ndash; Standard
+2. Stage 2: Bargaining &ndash; *The Albatross*
+3. Stage 3: Anger &ndash; Anthology
+4. Stage 4: Depression &ndash; *The Bolter*
+
+#### Positions
+
+There are currently 12 positions available. It is determined by the formula `seed % positions.length`. Respectively arranged as:
+
+1. Chairman
+2. President
+3. Vice President
+4. Secretary
+5. Poet
+6. Artist
+7. Mastermind
+8. Speaker
+9. Prophecy
+10. Albatross
+11. Alchemist
+12. Doctor
+
+### :balance_scale: Disclaimer
+**my-ttpd-song** hosts the image files with full attribution to their owners. All rights to the images are reserved.
