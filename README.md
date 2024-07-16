@@ -33,8 +33,6 @@ For instant name testing, go to [/bulk-test](https://my-ttpd-song.vercel.app/bul
 This includes the name informations, process, and the output.
 
 ### :balance_scale: Disclaimer
-**my-ttpd-song** only host the image files and not the audio. It  relies on `PyTube` to play music.
+**my-ttpd-song** only host the image files and not the audio. It  relies on third-party services to play music.
 
 For any DMCA requests of audio removal, please contact me.
-
-<img src="https://komarev.com/ghpvc/?username=creuserr" alt="" width="0"></img>
