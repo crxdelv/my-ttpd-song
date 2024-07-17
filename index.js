@@ -4,7 +4,9 @@ const names = ["taylor swift", "clara bow", "that black dog", "charlie puth", "t
 const positions = ["chairman", "president", "vice president", "secretary", "poet", "artist", "mastermind", "speaker", "prophecy", "albatross", "alchemist", "doctor"];
 const covers = [
   "fortnight.png",
-  new Array(15).fill("standard.png"),
+  new Array(11).fill("standard.png"),
+  "icdiwabh.jpeg",
+  new Array(3).fill("standard.png"),
   new Array(2).fill("anthology.jpg"),
   "albatross.jpg",
   new Array(9).fill("anthology.jpg"),
