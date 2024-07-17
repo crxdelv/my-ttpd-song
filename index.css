@@ -22,6 +22,7 @@ body, html {
 body {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 #background {
@@ -39,7 +40,8 @@ body {
 
 #footer {
   font-size: 0.7rem;
-  padding: 10px;
+  position: absolute;
+  bottom: 20px;
 }
 
 #footer > a {
