@@ -45,7 +45,7 @@ There are currently 4 stages available. The fifth one is probably the **reputati
 
 #### Positions
 
-There are currently 12 positions available. It is determined by the formula `seed % positions.length`. Respectively arranged as:
+There are currently 17 positions available. It is determined by the formula `seed % positions.length`. Respectively arranged as:
 
 1. Chairman
 2. President
@@ -59,6 +59,11 @@ There are currently 12 positions available. It is determined by the formula `see
 10. Albatross
 11. Alchemist
 12. Doctor
+13. Wise Man
+14. Good Samaritan
+15. Fearless Leader
+16. Real Tough Kid
+17. Good Neighbor
 
 ### :balance_scale: Disclaimer
 **my-ttpd-song** hosts the image files with full attribution to their owners. All rights to the images are reserved.
