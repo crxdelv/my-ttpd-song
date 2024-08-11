@@ -67,12 +67,33 @@
       <div id="result">
         <p class="fs-5 text-center m-0" id="text-title">Fortnight (feat. Post Malone)</p>
         <p class="text-center text-secondary" id="text-anthology">From the Anthology</p>
-        <p class="fw-bold m-1">Values</p>
-        <ul id="list-values"></ul>
-        <p class="fw-bold m-1" id="title-patterns">Patterns</p>
-        <ul id="list-patterns"></ul>
-        <p class="fw-bold m-1" id="title-walkthrough">Walkthrough</p>
-        <ol id="list-walkthrough"></ol>
+        <details class="my-1">
+          <summary>
+            <span class="fw-bold ps-1">Values</span>
+          </summary>
+          <ul id="list-values"></ul>
+        </details>
+        <details class="my-1">
+          <summary>
+            <span class="fw-bold ps-1" id="title-patterns">Patterns</span>
+          </summary>
+          <ul id="list-patterns"></ul>
+        </details>
+        <details class="my-1">
+          <summary>
+            <span class="fw-bold ps-1" id="title-walkthrough">Walkthrough</span>
+          </summary>
+          <ol id="list-walkthrough"></ol>
+        </details>
+        <details class="my-1">
+          <summary>
+            <span class="fw-bold ps-1">Miscellaneous</span>
+          </summary>
+          <ul>
+            <li>Position: <b id="misc-pos"></b></li>
+            <li>Stage: <b id="misc-stage"></b></li>
+          </ul>
+        </details>
       </div>
     </div>
   </div>
@@ -80,6 +101,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
   const tracklist = ["Fortnight (feat. Post Malone)", "The Tortured Poets Department", "My Boy Only Breaks His Favorite Toys", "Down Bad", "So Long, London", "But Daddy I Love Him", "Fresh Out The Slammer", "Florida!!! (feat. Florence + The Machine)", "Guilty as Sin?", "Who's Afraid of Little Old Me?", "I Can Fix Him (No Really I Can)", "loml", "I Can Do It With A Broken Heart", "The Smallest Man Who Ever Lived", "The Alchemy", "Clara Bow", "The Black Dog", "imgonnagetyouback", "The Albatross", "Chloe or Sam or Sophia or Marcus", "How Did It End?", "So High School", "I Hate It Here", "thanK you aIMee", "I Look in People's Window", "The Prophecy", "Cassandra", "Peter", "The Bolter", "Robin", "The Manuscript"];
+  const positions = ["chairman", "president", "vice president", "secretary", "poet", "artist", "mastermind", "speaker", "prophecy", "albatross", "alchemist", "doctor", "wise man", "good samaritan", "fearless leader", "real tough kid", "good neighbor"];
+  const stages = [
+    new Array(16).fill("i - denial"),
+    new Array(2).fill("iv - depression"),
+    "iii - bargaining",
+    new Array(9).fill("iv - depression"),
+    "ii - anger",
+    new Array(2).fill("iv - depression")
+  ].flat();
   function seed(raw, noproc) {
     let res = 0;
     let proc = [];
@@ -168,6 +198,10 @@
       }
     }
     $("#list-patterns").html(html);
+    const pos = positions[res % positions.length];
+    const stage = stages[res];
+    $("#misc-pos").text(`${pos.toUpperCase()} (${res}/${positions.length})`);
+    $("#misc-stage").text(stage.toUpperCase());
     $("#text-title").text(tracklist[res]);
     $("#text-anthology").toggle(res > 15);
     $("#title-walkthrough").text(`Walkthrough (${val.length} steps)`);
@@ -191,7 +225,8 @@
       return $("#text-label").text("Must only contain ASCII characters");
     }
     const conv = val.replaceAll(" ", "").toLowerCase();
-    if(conv.includes("kimk") || conv.includes("kanye")) {
+    const easter = ["kimk", "kanye", "mayer", "healy", "scooter"].reduce((a, b) => conv.includes(b) || a, false);
+    if(easter) {
       $("#text-hint").text("Press enter");
       return $("#text-label").html("As an easter egg, this will not work on the website. (Keys: KIMK, KANYE, MAYER, HEALY, SCOOTER)");
     }
